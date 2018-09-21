@@ -1,0 +1,6 @@
+{
+    "port": "8080",
+    "trashcanName": ".trashcan",
+    "allowGraphql": true,
+    "GOMAXPROCS": 1
+}

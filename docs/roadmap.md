@@ -27,3 +27,5 @@
 ### P1
 
 - Preview file
+
+- Trashcan

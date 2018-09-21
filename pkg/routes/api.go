@@ -1,5 +1,5 @@
 /*
-	routes package defines all routes and APIs
+Package routes defines all routes and APIs
 */
 package routes
 
@@ -10,6 +10,7 @@ import (
 	"github.com/yuqingc/rmdashrf/pkg/v1handlers"
 )
 
+// Router is gin defalt returned engine
 var Router = gin.Default()
 
 func init() {
