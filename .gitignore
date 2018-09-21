@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# IDEs
+.vscode
+.idea
+
+# output binary files
+/bin
+*.out
+*.exe
+
+# dependencies and vendor
+/vendor
