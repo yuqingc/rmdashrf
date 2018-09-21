@@ -1,4 +1,5 @@
 {
+    "mountDir": "/home/matt/Projects/github.com/yuqingc/data",
     "port": "8080",
     "trashcanName": ".trashcan",
     "allowGraphql": true,

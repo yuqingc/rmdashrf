@@ -29,3 +29,5 @@
 - Preview file
 
 - Trashcan
+
+- gRPC
