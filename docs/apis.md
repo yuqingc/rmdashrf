@@ -1,6 +1,6 @@
 # APIs
 
-Good API Design Reference: <a href="https://docs.microsoft.com/en-us/rest/api/storageservices/file-service-rest-api" target="_blank">Microsoft Azure APIs</a>
+<a href="https://docs.microsoft.com/en-us/rest/api/storageservices/file-service-rest-api" target="_blank">Microsoft Azure APIs</a> is a good practice for API design. I wrote this documentation by referring to it.
 
 ## Group: `/api/v1`
 
@@ -9,12 +9,12 @@ Caveats:
 
 - Relative parent path (`..`) is not allowed, so there is no possibility you reach anything outside the mounted directory
 
-### List directories and files
+### List directories and files of a specified directory
 
 This operation returns a list of files or directories under the specified directory. It lists the contents for a single level of the directory hierarchy.
 
 ```
-GET /default/<my directory path>
+GET /default/<my directory path>?restype=directory&comp=list&all=<bool>&maxresults=<int>&extension=<string>
 ```
 
 **Request params**
@@ -38,5 +38,5 @@ JSON
 ### Create a file
 
 ```
-POST
+PUT
 ```

@@ -8,7 +8,7 @@ import (
 
 func main() {
 	const port = "8080"
-	fmt.Println("Serving is running at " + port)
+	fmt.Println("RMDASHRF is running at :" + port)
 	router := routes.Router
 	router.Run(":" + port)
 }

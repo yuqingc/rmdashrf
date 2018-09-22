@@ -11,6 +11,8 @@ import (
 
 var _ = fmt.Print // ONLY for debug
 
+// ListDir returns all files and/or directories infomation of a specified path
+// and count of all f/d rather than the count of the returned files
 func ListDir(dir string, all bool, max int, ext string) (results []FileProperty, total int, err error) {
 	files, err := ioutil.ReadDir(dir)
 	if err != nil {

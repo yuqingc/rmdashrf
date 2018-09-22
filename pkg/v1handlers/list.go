@@ -15,7 +15,7 @@ import (
 	"github.com/yuqingc/rmdashrf/pkg/manager"
 )
 
-var _ = fmt.Print // ONLY used for debugging
+var _ = fmt.Print // ONLY for debug
 
 // TODO: checks if mount dir exists. Create it if not
 // TODO: mountpath must be an absolute path
@@ -32,12 +32,12 @@ type ListResponse struct {
 }
 
 // GetList returns all files and directories of specified path
-// /default/:path
+// api: /default/:path
 func GetList(c *gin.Context) {
 	contentPath := c.Param("contentPath")
 	if strings.Contains(contentPath, "..") {
-		c.String(http.StatusBadRequest, fmt.Sprintf("invalid path \"%s\"\n", contentPath))
 		log.Printf("querying path \"%s\" is denied\n", contentPath)
+		c.String(http.StatusBadRequest, fmt.Sprintf("invalid path \"%s\"\n", contentPath))
 		return
 	}
 	paramAll := c.Query("all")
@@ -47,8 +47,9 @@ func GetList(c *gin.Context) {
 	dir := path.Join(MountDir, contentPath)
 	all := paramAll == "true"
 	var maxresults = MaxListResults
+	var err error
 	if paramMaxresults != "" {
-		maxresults, err := strconv.Atoi(paramMaxresults)
+		maxresults, err = strconv.Atoi(paramMaxresults)
 		if err != nil {
 			log.Println(err)
 			c.String(http.StatusBadRequest, "invalid maxresult")

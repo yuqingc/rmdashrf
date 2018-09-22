@@ -16,9 +16,15 @@
 
 ### P0
 
+- List file, directory of a specified directory
+
 - Create file, directory
 
 - Remove file, directory
+
+- Rename file, directory
+
+- Move file, directory
 
 - Upload file, directory
 

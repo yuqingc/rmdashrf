@@ -4,7 +4,7 @@ Package routes defines all routes and APIs
 package routes
 
 import (
-	"fmt"
+	"log"
 
 	"github.com/gin-gonic/gin"
 	"github.com/yuqingc/rmdashrf/pkg/v1handlers"
@@ -14,9 +14,9 @@ import (
 var Router = gin.Default()
 
 func init() {
-	fmt.Println("Init function is executed in package `routes`")
+	log.Println("loading routes...")
 	v1 := Router.Group("/api/v1")
 	{
-		v1.GET("/default/*contentPath", v1handlers.GetList)
+		v1.GET("/default/*contentPath", v1handlers.HandleGet)
 	}
 }
