@@ -1,6 +1,7 @@
 # rmdashrf (WIP)
 
-**rmdashrf** serves mounted directory with highly security and efficiently
+**RMDASHRF** serves mounted directory with highly security and efficiently
+
 
 ## Get Started
 

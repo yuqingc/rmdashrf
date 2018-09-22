@@ -1,6 +1,6 @@
 # APIs
 
-<a href="https://docs.microsoft.com/en-us/rest/api/storageservices/file-service-rest-api" target="_blank">Microsoft Azure APIs</a> is a good practice for API design. I wrote this documentation by referring to it.
+<a href="https://docs.microsoft.com/en-us/rest/api/storageservices/file-service-rest-api" target="_blank">Microsoft Azure APIs</a> is a good practice for API design. The API of RMDASHRF is designed by referring to it.
 
 ## Group: `/api/v1`
 
@@ -21,7 +21,9 @@ GET /default/<my directory path>?restype=directory&comp=list&all=<bool>&maxresul
 
 |Name|Description|
 |-|-|
-|all|Optional. Lists all files when set to `true`. Default to `false`, files of which names starting with dot `.` are not included|
+|restype|Required. Set it to "directory"|
+|comp|Required. Set it to "list"|
+|all|Optional. Lists all files when set to `true`. Default to `false`, files of which names start with dot `.` are not included|
 |maxresults|Optional. Specifies the maximum number of files and/or directories to return. If the request does not specify `maxresults` or specifies a value greater than 5,000, the server will return up to 5,000 items.|
 |extension|Optional. Filters the results to return only files and directories whose name has the specified extension or suffix. For example, `extension=.js`|
 
