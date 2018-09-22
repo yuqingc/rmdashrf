@@ -17,6 +17,6 @@ func init() {
 	fmt.Println("Init function is executed in package `routes`")
 	v1 := Router.Group("/api/v1")
 	{
-		v1.GET("/test", v1handlers.Test)
+		v1.GET("/default/*contentPath", v1handlers.GetList)
 	}
 }
