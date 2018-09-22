@@ -1,11 +1,11 @@
 # APIs
 
-<a href="https://docs.microsoft.com/en-us/rest/api/storageservices/file-service-rest-api" target="_blank">Microsoft Azure APIs</a> is a good practice for API design. The API of RMDASHRF is designed by referring to it.
+<a href="https://docs.microsoft.com/en-us/rest/api/storageservices/file-service-rest-api" target="_blank">Microsoft Azure APIs</a> is a good practice for API design. The API of RMDASHRF is designed by learning from it.
 
 ## Group: `/api/v1`
 
 Caveats: 
-- `default` is the current volume name or owner name although there is only a single account and a single mounted volume at present. We will support multi mounted volumes for different account in future versions
+- `default` is the current volume name or owner name although there is only a single account and a single mounted volume at present. We will support multi mounted volumes for different accounts in future versions
 
 - Relative parent path (`..`) is not allowed, so there is no possibility you reach anything outside the mounted directory
 
