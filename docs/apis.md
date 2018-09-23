@@ -35,10 +35,26 @@ GET /default/<my directory path>?restype=directory&comp=list&all=<bool>&maxresul
 
 **Response body**
 
+```
 JSON
+```
 
 ### Create a file
 
 ```
 PUT /default/<my directory path>/<my file>
+```
+
+Fails if the file is already exists or the path to the directory does not exist
+
+**Response status**
+
+```
+201 Created
+```
+
+**Response body**
+
+```
+NONE
 ```
