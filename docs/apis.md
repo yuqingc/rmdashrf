@@ -55,6 +55,46 @@ Fails if the file is already exists or the path to the directory does not exist
 
 **Response body**
 
+JSON. Template:
+
+```json
+{
+    "metadata": {
+        "total": 4
+    },
+    "items": [
+        {
+            "name": "run.sh",
+            "size": 4096,
+            "mode": "drwxr-xr-x",
+            "modTime": "2018-09-24 00:31:44.047714198 +0800 CST",
+            "isDir": false
+        }
+    ]
+}
+```
+
+### Create a directory
+
+```
+PUT /default/<my directory path>/<new directory>?restype=directory&parents=<bool>
+```
+
+**Request params**
+
+|Name|Description|
+|-|-|
+|restype|Required. Set it to "directory"|
+|parents|Optional. Default to `false`. Make parents directories if needed when set to `true`|
+
+**Response status**
+
+```
+201 Created
+```
+
+**Response body**
+
 ```
 NONE
 ```
