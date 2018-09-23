@@ -2,6 +2,9 @@
 
 <a href="https://docs.microsoft.com/en-us/rest/api/storageservices/file-service-rest-api" target="_blank">Microsoft Azure APIs</a> is a good practice for API design. The API of RMDASHRF is designed by learning from it.
 
+Table of Contents
+=================
+
 <!--ts-->
    * [APIs](#apis)
       * [Group: /api/v1](#group-apiv1)

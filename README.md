@@ -2,8 +2,12 @@
 
 **RMDASHRF** serves mounted directory with highly security and efficiently
 
+Table of Contents
+=================
+
 <!--ts-->
    * [rmdashrf (WIP)](#rmdashrf-wip)
+   * [Table of Contents](#table-of-contents)
       * [Get Started](#get-started)
       * [API Documentation](#api-documentation)
       * [Roadmap](#roadmap)
@@ -12,7 +16,7 @@
          * [Dependencies](#dependencies)
          * [Debug](#debug)
 
-<!-- Added by: matt, at: 2018-09-24T00:55+08:00 -->
+<!-- Added by: matt, at: 2018-09-24T01:03+08:00 -->
 
 <!--te-->
 
