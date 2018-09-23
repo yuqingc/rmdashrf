@@ -2,6 +2,20 @@
 
 **RMDASHRF** serves mounted directory with highly security and efficiently
 
+Table of Contents
+=================
+
+   * [rmdashrf (WIP)](#rmdashrf-wip)
+      * [Get Started](#get-started)
+      * [API Documentation](#api-documentation)
+      * [Roadmap](#roadmap)
+      * [Contributing](#contributing)
+         * [Tools](#tools)
+         * [Dependencies](#dependencies)
+         * [Debug](#debug)
+
+Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
+
 
 ## Get Started
 
