@@ -2,9 +2,7 @@
 
 **RMDASHRF** serves mounted directory with highly security and efficiently
 
-Table of Contents
-=================
-
+<!--ts-->
    * [rmdashrf (WIP)](#rmdashrf-wip)
       * [Get Started](#get-started)
       * [API Documentation](#api-documentation)
@@ -14,8 +12,9 @@ Table of Contents
          * [Dependencies](#dependencies)
          * [Debug](#debug)
 
-Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
+<!-- Added by: matt, at: 2018-09-24T00:55+08:00 -->
 
+<!--te-->
 
 ## Get Started
 

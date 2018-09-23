@@ -12,3 +12,7 @@
 
 # dependencies and vendor
 /vendor
+
+# gh-md-toc generated files
+*.md.orig.*
+*.md.toc.*
