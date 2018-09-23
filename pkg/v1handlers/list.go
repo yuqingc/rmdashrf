@@ -9,18 +9,12 @@ import (
 	"net/http"
 	"path"
 	"strconv"
-	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/yuqingc/rmdashrf/pkg/manager"
 )
 
 var _ = fmt.Print // ONLY for debug
-
-// TODO: checks if mount dir exists. Create it if not
-// TODO: mountpath must be an absolute path
-const MountDir = "/home/matt/Projects/github.com/yuqingc/data"
-const MaxListResults = 5000
 
 type Metadata struct {
 	Total int `json:"total"`
@@ -34,9 +28,10 @@ type ListResponse struct {
 // GetList returns all files and directories of specified path
 // api: /default/:path
 func GetList(c *gin.Context) {
+	var err error
 	contentPath := c.Param("contentPath")
-	if strings.Contains(contentPath, "..") {
-		log.Printf("querying path \"%s\" is denied\n", contentPath)
+	if err = CheckContentPath(contentPath); err != nil {
+		log.Println("checkpath failed:", err)
 		c.String(http.StatusBadRequest, fmt.Sprintf("invalid path \"%s\"\n", contentPath))
 		return
 	}
@@ -47,7 +42,6 @@ func GetList(c *gin.Context) {
 	dir := path.Join(MountDir, contentPath)
 	all := paramAll == "true"
 	var maxresults = MaxListResults
-	var err error
 	if paramMaxresults != "" {
 		maxresults, err = strconv.Atoi(paramMaxresults)
 		if err != nil {

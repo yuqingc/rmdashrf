@@ -18,5 +18,6 @@ func init() {
 	v1 := Router.Group("/api/v1")
 	{
 		v1.GET("/default/*contentPath", v1handlers.HandleGet)
+		v1.PUT("/default/*contentPath", v1handlers.HandlePut)
 	}
 }

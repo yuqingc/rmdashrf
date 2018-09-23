@@ -16,5 +16,5 @@ func HandleGet(c *gin.Context) {
 		GetList(c)
 		return
 	}
-	c.String(http.StatusBadRequest, "invalid query params for `restype` or `comp`")
+	c.String(http.StatusBadRequest, BadRequestErrMsg)
 }

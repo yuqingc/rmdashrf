@@ -38,6 +38,7 @@
 
 - gRPC
 
-### Future plan
+### Further plan
 
-- multipul mouted volumes for different accounts
+- multiple mounted volumes for different accounts
+- 

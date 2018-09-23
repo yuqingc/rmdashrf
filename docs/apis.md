@@ -40,5 +40,5 @@ JSON
 ### Create a file
 
 ```
-PUT
+PUT /default/<my directory path>/<my file>
 ```
