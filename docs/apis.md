@@ -7,12 +7,14 @@ Table of Contents
 
 <!--ts-->
    * [APIs](#apis)
+   * [Table of Contents](#table-of-contents)
       * [Group: /api/v1](#group-apiv1)
          * [List directories and files of a specified directory](#list-directories-and-files-of-a-specified-directory)
          * [Create a file](#create-a-file)
          * [Create a directory](#create-a-directory)
+         * [Remove a file or directory](#remove-a-file-or-directory)
 
-<!-- Added by: matt, at: 2018-09-24T00:59+08:00 -->
+<!-- Added by: matt, at: 2018-09-24T12:01+08:00 -->
 
 <!--te-->
 
@@ -105,6 +107,30 @@ PUT /default/<my directory path>/<new directory>?restype=directory&parents=<bool
 
 ```
 201 Created
+```
+
+**Response body**
+
+```
+NONE
+```
+
+### Remove a file or directory
+
+```
+DELETE /default/<my directory or file path>?recursive=<bool>
+```
+
+**Request params**
+
+|Name|Description|
+|-|-|
+|recursive|Optional. Default to `false`. Delete directories and their children recursively when set to `true`|
+
+**Response status**
+
+```
+202 Accepted
 ```
 
 **Response body**
