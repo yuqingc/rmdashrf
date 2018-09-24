@@ -32,20 +32,16 @@ func CreateFile(fullFilePath string) (*os.File, error) {
 // CreateDir creates new a new directory
 // It creates parents directory if needed when `parents` is `true`
 // It is similar to `mkdir -p`
-func CreateDir(fullDirPath string, parents bool) error {
-	if _, err := os.Stat(fullDirPath); !os.IsNotExist(err) {
+func CreateDir(fullDirPath string, parents bool) (err error) {
+	if _, err = os.Stat(fullDirPath); !os.IsNotExist(err) {
 		errMsg := fmt.Sprintf("%s already exists", fullDirPath)
 		return errors.New(errMsg)
 	}
 
 	if parents {
-		if err := os.MkdirAll(fullDirPath, 0755); err != nil {
-			return err
-		}
+		err = os.MkdirAll(fullDirPath, 0755)
 	} else {
-		if err := os.Mkdir(fullDirPath, 0755); err != nil {
-			return err
-		}
+		err = os.Mkdir(fullDirPath, 0755)
 	}
-	return nil
+	return err
 }

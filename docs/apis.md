@@ -13,8 +13,9 @@ Table of Contents
          * [Create a file](#create-a-file)
          * [Create a directory](#create-a-directory)
          * [Remove a file or directory](#remove-a-file-or-directory)
+         * [Move or rename a file or directory](#move-or-rename-a-file-or-directory)
 
-<!-- Added by: matt, at: 2018-09-24T12:01+08:00 -->
+<!-- Added by: matt, at: 2018-09-24T23:43+08:00 -->
 
 <!--te-->
 
@@ -57,11 +58,11 @@ JSON
 
 ### Create a file
 
+Fails if the file is already exists or the path to the directory does not exist
+
 ```
 PUT /default/<my directory path>/<my file>
 ```
-
-Fails if the file is already exists or the path to the directory does not exist
 
 **Response status**
 
@@ -71,7 +72,7 @@ Fails if the file is already exists or the path to the directory does not exist
 
 **Response body**
 
-JSON. Template:
+application/json
 
 ```json
 {
@@ -93,15 +94,16 @@ JSON. Template:
 ### Create a directory
 
 ```
-PUT /default/<my directory path>/<new directory>?restype=directory&parents=<bool>
+PUT /default/<my directory path>/<new directory>?action=create&restype=directory&parents=<bool>
 ```
 
 **Request params**
 
 |Name|Description|
 |-|-|
+|action|Required. Set it to "create"|
 |restype|Required. Set it to "directory"|
-|parents|Optional. Default to `false`. Make parents directories if needed when set to `true`|
+|parents|Optional. Default to `false`. Make parents directories if needed when set to `true`. Similar to `mkdir -p`, which means this only works when creating a *directory*|
 
 **Response status**
 
@@ -130,7 +132,34 @@ DELETE /default/<my directory or file path>?recursive=<bool>
 **Response status**
 
 ```
-202 Accepted
+204 No Content
+```
+
+**Response body**
+
+```
+NONE
+```
+
+### Move or rename a file or directory
+
+It is similar to the `mv` command. The difference is that the new path cannot be a path which has already existed
+
+```
+PATCH /default/<old path>?action=rename&to=<new path>
+```
+
+**Request params**
+
+|Name|Description|
+|-|-|
+|action|Required. Set it to "rename"|
+|to|New path|
+
+**Response status**
+
+```
+204 No Content
 ```
 
 **Response body**

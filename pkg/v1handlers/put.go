@@ -13,12 +13,13 @@ import (
 )
 
 func HandlePut(c *gin.Context) {
+	action := c.Query("action")
 	restype := c.Query("restype")
-	if restype == "" {
+	if action == "create" && restype == "" {
 		CreateFile(c)
 		return
 	}
-	if restype == "directory" {
+	if action == "create" && restype == "directory" {
 		CreateDir(c)
 		return
 	}

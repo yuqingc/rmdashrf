@@ -22,9 +22,9 @@ func HandleDelete(c *gin.Context) {
 	}
 
 	fullPath := path.Join(MountDir, contentPath)
-	paramRecuresive := c.Query("recursive")
+	paramRecursive := c.Query("recursive")
 	recursive := false
-	if paramRecuresive == "true" {
+	if paramRecursive == "true" {
 		recursive = true
 	}
 	if err := manager.Remove(fullPath, recursive); err != nil {
@@ -36,5 +36,5 @@ func HandleDelete(c *gin.Context) {
 		c.String(http.StatusBadRequest, ErrMsg)
 		return
 	}
-	c.String(http.StatusAccepted, "Deleted")
+	c.String(http.StatusNoContent, "")
 }
