@@ -175,6 +175,8 @@ NONE
 PUT /default/<new path>?action=copy&from=<old path>&restype=<directory>&async=<bool>
 ```
 
+`<new path>` does not refer to the directory into which you copy your file/directory. It is the path of the copied file/directory itself
+
 **Request params**
 
 |Name|Description|

@@ -3,8 +3,62 @@ package manager
 import (
 	"fmt"
 	"io"
+	"io/ioutil"
 	"os"
+	"path"
+	"strings"
 )
+
+// CopyDir copies a directory and its children recursively
+// Terminates when it meets an error (no fall back)
+func CopyDir(src, dst string) (err error) {
+	if strings.HasPrefix(dst, src) {
+		return fmt.Errorf("Operation not allowed. Copying directory aborted. Trying to copy a path into its child directory will cause infinite loop.")
+	}
+	// src should exist and must be a directory
+	sfi, err := os.Stat(src)
+	if err != nil {
+		return err
+	}
+	if !sfi.IsDir() {
+		return fmt.Errorf("src path %s is not a directory", src)
+	}
+
+	// dst should not exist
+	if _, err = os.Stat(dst); !os.IsNotExist(err) {
+		return fmt.Errorf("%s, file or directory already exists", dst)
+	}
+
+	if err = walkDir(src, dst); err != nil {
+		return err
+	}
+
+	return
+}
+
+func walkDir(dir, counterpartDst string) (err error) {
+	if err = os.Mkdir(counterpartDst, 0755); err != nil {
+		return err
+	}
+	contents, err := ioutil.ReadDir(dir)
+	if err != nil {
+		return err
+	}
+	for _, content := range contents {
+		contentPath := path.Join(dir, content.Name())
+		counterpartPath := path.Join(counterpartDst, content.Name())
+		if content.IsDir() {
+			if err = walkDir(contentPath, counterpartPath); err != nil {
+				return err
+			}
+		} else {
+			if err = CopyFile(contentPath, counterpartPath); err != nil {
+				return err
+			}
+		}
+	}
+	return
+}
 
 // ref: stackoverflow: https://stackoverflow.com/questions/21060945/simple-way-to-copy-a-file-in-golang
 

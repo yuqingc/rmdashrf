@@ -14,26 +14,26 @@ var _ = fmt.Print // ONLY for debug
 // ListDir returns all files and/or directories infomation of a specified path
 // and count of all f/d rather than the count of the returned files
 func ListDir(dir string, all bool, max int, ext string) (results []FileProperty, total int, err error) {
-	files, err := ioutil.ReadDir(dir)
+	contents, err := ioutil.ReadDir(dir)
 	if err != nil {
 		return nil, 0, err
 	}
-	total = len(files)
-	results = make([]FileProperty, 0, len(files))
-	for _, file := range files {
+	total = len(contents)
+	results = make([]FileProperty, 0, len(contents))
+	for _, content := range contents {
 		if len(results) >= max {
 			break
 		}
-		if !all && strings.HasPrefix(file.Name(), ".") {
+		if !all && strings.HasPrefix(content.Name(), ".") {
 			continue
 		}
-		if strings.HasSuffix(file.Name(), ext) {
+		if strings.HasSuffix(content.Name(), ext) {
 			results = append(results, FileProperty{
-				Name:    file.Name(),
-				Size:    file.Size(),
-				Mode:    file.Mode().String(),
-				ModTime: file.ModTime().String(),
-				IsDir:   file.IsDir(),
+				Name:    content.Name(),
+				Size:    content.Size(),
+				Mode:    content.Mode().String(),
+				ModTime: content.ModTime().String(),
+				IsDir:   content.IsDir(),
 			})
 		}
 	}

@@ -43,7 +43,7 @@ func Rename(c *gin.Context) {
 	newPath := path.Join(MountDir, paramTo)
 	if err := manager.Rename(oldPath, newPath); err != nil {
 		log.Println("rename failed:", err)
-		var ErrMsg = "rename failed: old path should exists and new path should not exist"
+		var ErrMsg = err.Error()
 		if os.IsNotExist(err) {
 			ErrMsg = "file or directory does not exist"
 		}

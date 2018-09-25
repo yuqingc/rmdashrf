@@ -30,6 +30,10 @@ func HandlePut(c *gin.Context) {
 		CopyFile(c)
 		return
 	}
+	if action == "copy" && restype == "directory" {
+		CopyDir(c)
+		return
+	}
 	c.String(http.StatusBadRequest, BadRequestErrMsg)
 }
 
@@ -102,10 +106,36 @@ func CopyFile(c *gin.Context) {
 		return
 	}
 
-	fullFilePath := path.Join(MountDir, paramContentPath)
-	fullFromPath := path.Join(MountDir, paramFrom)
+	fullDstPath := path.Join(MountDir, paramContentPath)
+	fullSrcPath := path.Join(MountDir, paramFrom)
 
-	if err := manager.CopyFile(fullFromPath, fullFilePath); err != nil {
+	if err := manager.CopyFile(fullSrcPath, fullDstPath); err != nil {
+		log.Println(err)
+		c.String(http.StatusBadRequest, err.Error())
+		return
+	}
+	c.String(http.StatusCreated, "Copied")
+}
+
+func CopyDir(c *gin.Context) {
+	paramContentPath := c.Param("contentPath")
+	paramFrom := c.Query("from")
+
+	if paramFrom == "" {
+		c.String(http.StatusBadRequest, "param `from` is required")
+		return
+	}
+
+	if err := EnsureSecurePaths(paramContentPath, paramFrom); err != nil {
+		log.Println("checkpath failed:", err)
+		c.String(http.StatusBadRequest, err.Error())
+		return
+	}
+
+	fullDesPath := path.Join(MountDir, paramContentPath)
+	fullSrcPath := path.Join(MountDir, paramFrom)
+
+	if err := manager.CopyDir(fullSrcPath, fullDesPath); err != nil {
 		log.Println(err)
 		c.String(http.StatusBadRequest, err.Error())
 		return
