@@ -36,6 +36,7 @@ func CopyDir(src, dst string) (err error) {
 	return
 }
 
+// walkDir copies child contents of a directory recursively
 func walkDir(dir, counterpartDst string) (err error) {
 	if err = os.Mkdir(counterpartDst, 0755); err != nil {
 		return err
@@ -80,6 +81,7 @@ func CopyFile(src, dst string) (err error) {
 	return
 }
 
+// ensureBeforeCopy ensures copying process for copying FILE
 func ensureBeforeCopy(src, dst string) (err error) {
 	sfi, err := os.Stat(src)
 	if err != nil {
