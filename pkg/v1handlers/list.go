@@ -1,5 +1,5 @@
 /*
-package v1handlers functions handling api/v1 Gin routes
+Package v1handlers functions handling api/v1 Gin routes
 */
 package v1handlers
 
@@ -16,10 +16,12 @@ import (
 
 var _ = fmt.Print // ONLY for debug
 
+// Metadata of result for listing content
 type Metadata struct {
 	Total int `json:"total"`
 }
 
+// ListResponse is type of result for listing content
 type ListResponse struct {
 	Metadata Metadata               `json:"metadata"`
 	Items    []manager.FileProperty `json:"items"`

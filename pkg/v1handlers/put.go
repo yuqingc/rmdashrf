@@ -12,6 +12,9 @@ import (
 	"github.com/yuqingc/rmdashrf/pkg/manager"
 )
 
+// HandlePut handles all PUT request
+// including creating files and directories,
+// copying files and directories
 func HandlePut(c *gin.Context) {
 	action := c.Query("action")
 	restype := c.Query("restype")

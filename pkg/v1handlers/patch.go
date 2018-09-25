@@ -11,6 +11,8 @@ import (
 	"github.com/yuqingc/rmdashrf/pkg/manager"
 )
 
+// HandlePatch handles all PATCH requests
+// rename,
 func HandlePatch(c *gin.Context) {
 	action := c.Query("action")
 
@@ -21,6 +23,7 @@ func HandlePatch(c *gin.Context) {
 	c.String(http.StatusBadRequest, "invalid request param action")
 }
 
+// Rename handles all rename requests from `HandlePatch`
 func Rename(c *gin.Context) {
 	contentPath := c.Param("contentPath")
 	to := c.Query("to")
@@ -36,6 +39,13 @@ func Rename(c *gin.Context) {
 		c.String(http.StatusBadRequest, fmt.Sprintf("invalid path \"%s\"\n", contentPath))
 		return
 	}
+
+	if err := CheckContentPath(to); err != nil {
+		log.Println("checkpath failed:", err)
+		c.String(http.StatusBadRequest, fmt.Sprintf("invalid path \"%s\"\n", to))
+		return
+	}
+
 	fullOldPath := path.Join(MountDir, contentPath)
 	fullNewPath := path.Join(MountDir, to)
 	if err := manager.Rename(fullOldPath, fullNewPath); err != nil {
