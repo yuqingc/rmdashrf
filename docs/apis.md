@@ -14,8 +14,9 @@ Table of Contents
          * [Create a directory](#create-a-directory)
          * [Remove a file or directory](#remove-a-file-or-directory)
          * [Move or rename a file or directory](#move-or-rename-a-file-or-directory)
+         * [Copy a file or directory](#copy-a-file-or-directory)
 
-<!-- Added by: matt, at: 2018-09-24T23:43+08:00 -->
+<!-- Added by: matt, at: 2018-09-25T20:45+08:00 -->
 
 <!--te-->
 
@@ -52,8 +53,23 @@ GET /default/<my directory path>?restype=directory&comp=list&all=<bool>&maxresul
 
 **Response body**
 
-```
-JSON
+application/json
+
+```json
+{
+    "metadata": {
+        "total": 4
+    },
+    "items": [
+        {
+            "name": "run.sh",
+            "size": 4096,
+            "mode": "-rwxr-xr-x",
+            "modTime": "2018-09-24 00:31:44.047714198 +0800 CST",
+            "isDir": false
+        }
+    ]
+}
 ```
 
 ### Create a file
@@ -72,23 +88,8 @@ PUT /default/<my directory path>/<my file>
 
 **Response body**
 
-application/json
-
-```json
-{
-    "metadata": {
-        "total": 4
-    },
-    "items": [
-        {
-            "name": "run.sh",
-            "size": 4096,
-            "mode": "drwxr-xr-x",
-            "modTime": "2018-09-24 00:31:44.047714198 +0800 CST",
-            "isDir": false
-        }
-    ]
-}
+```
+NONE
 ```
 
 ### Create a directory
@@ -160,6 +161,32 @@ PATCH /default/<old path>?action=rename&to=<new path>
 
 ```
 204 No Content
+```
+
+**Response body**
+
+```
+NONE
+```
+
+### Copy a file or directory
+
+```
+PUT /default/<new path>?action=copy&from=<old path>&restype=<directory>&async=<bool>
+```
+
+**Request params**
+
+|Name|Description|
+|-|-|
+|action|Required. Set it to "copy"|
+|from|Required. Old path|
+|restype|Optional. Set it to "directory" to copy a directory, or copy a file|
+
+**Response status**
+
+```
+201 Created
 ```
 
 **Response body**

@@ -32,9 +32,9 @@ type ListResponse struct {
 func GetList(c *gin.Context) {
 	var err error
 	contentPath := c.Param("contentPath")
-	if err = CheckContentPath(contentPath); err != nil {
+	if err = EnsureSecurePaths(contentPath); err != nil {
 		log.Println("checkpath failed:", err)
-		c.String(http.StatusBadRequest, fmt.Sprintf("invalid path \"%s\"\n", contentPath))
+		c.String(http.StatusBadRequest, err.Error())
 		return
 	}
 	paramAll := c.Query("all")

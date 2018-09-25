@@ -1,14 +1,17 @@
 package v1handlers
 
 import (
-	"errors"
+	"fmt"
 	"strings"
 )
 
-// CheckContentPath returns an error is the path is not allowed
-func CheckContentPath(contentPath string) (err error) {
-	if strings.Contains(contentPath, "..") {
-		err = errors.New("relative parent path is not allowed")
+// EnsureSecurePaths stops checking and returns an error when a path is insecure
+func EnsureSecurePaths(contentPaths ...string) error {
+	for _, contentPath := range contentPaths {
+		if strings.Contains(contentPath, "..") {
+			err := fmt.Errorf("invalid path `%s`: relative parent path is not allowed", contentPath)
+			return err
+		}
 	}
-	return
+	return nil
 }

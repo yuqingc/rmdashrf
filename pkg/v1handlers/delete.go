@@ -1,7 +1,6 @@
 package v1handlers
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -15,9 +14,9 @@ import (
 // remove a file or directory
 func HandleDelete(c *gin.Context) {
 	contentPath := c.Param("contentPath")
-	if err := CheckContentPath(contentPath); err != nil {
+	if err := EnsureSecurePaths(contentPath); err != nil {
 		log.Println("checkpath failed:", err)
-		c.String(http.StatusBadRequest, fmt.Sprintf("invalid path \"%s\"\n", contentPath))
+		c.String(http.StatusBadRequest, err.Error())
 		return
 	}
 

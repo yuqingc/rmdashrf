@@ -26,19 +26,25 @@ func HandlePut(c *gin.Context) {
 		CreateDir(c)
 		return
 	}
+	if action == "copy" && restype == "" {
+		CopyFile(c)
+		return
+	}
 	c.String(http.StatusBadRequest, BadRequestErrMsg)
 }
 
+// TODO: split these functions into different files
+
 // CreateFile handles the request for creating a new file
 func CreateFile(c *gin.Context) {
-	contentPath := c.Param("contentPath")
-	if err := CheckContentPath(contentPath); err != nil {
+	paramContentPath := c.Param("contentPath")
+	if err := EnsureSecurePaths(paramContentPath); err != nil {
 		log.Println("checkpath failed:", err)
-		c.String(http.StatusBadRequest, fmt.Sprintf("invalid path \"%s\"\n", contentPath))
+		c.String(http.StatusBadRequest, fmt.Sprintf("invalid path \"%s\"\n", paramContentPath))
 		return
 	}
 
-	fullFilePath := path.Join(MountDir, contentPath)
+	fullFilePath := path.Join(MountDir, paramContentPath)
 	createdFile, err := manager.CreateFile(fullFilePath)
 	if err != nil {
 		log.Println(err)
@@ -55,20 +61,19 @@ func CreateFile(c *gin.Context) {
 
 // CreateDir handles the request for creating a new directory
 func CreateDir(c *gin.Context) {
-	contentPath := c.Param("contentPath")
-	if err := CheckContentPath(contentPath); err != nil {
+	paramContentPath := c.Param("contentPath")
+	if err := EnsureSecurePaths(paramContentPath); err != nil {
 		log.Println("checkpath failed:", err)
-		c.String(http.StatusBadRequest, fmt.Sprintf("invalid path \"%s\"\n", contentPath))
+		c.String(http.StatusBadRequest, fmt.Sprintf("invalid path \"%s\"\n", paramContentPath))
 		return
 	}
 
-	paramParents := c.Query("parents")
-	var parents = false
-	if paramParents == "true" {
+	parents := false
+	if paramParents := c.Query("parents"); paramParents == "true" {
 		parents = true
 	}
 
-	fullDirPath := path.Join(MountDir, contentPath)
+	fullDirPath := path.Join(MountDir, paramContentPath)
 	if err := manager.CreateDir(fullDirPath, parents); err != nil {
 		log.Println(err)
 		var errMsg = "file or directory already exits"
@@ -79,4 +84,31 @@ func CreateDir(c *gin.Context) {
 		return
 	}
 	c.String(http.StatusCreated, "directory is created")
+}
+
+// CopyFile handles the request for copying a file
+func CopyFile(c *gin.Context) {
+	paramContentPath := c.Param("contentPath")
+	paramFrom := c.Query("from")
+
+	if paramFrom == "" {
+		c.String(http.StatusBadRequest, "param `from` is required")
+		return
+	}
+
+	if err := EnsureSecurePaths(paramContentPath, paramFrom); err != nil {
+		log.Println("checkpath failed:", err)
+		c.String(http.StatusBadRequest, err.Error())
+		return
+	}
+
+	fullFilePath := path.Join(MountDir, paramContentPath)
+	fullFromPath := path.Join(MountDir, paramFrom)
+
+	if err := manager.CopyFile(fullFromPath, fullFilePath); err != nil {
+		log.Println(err)
+		c.String(http.StatusBadRequest, err.Error())
+		return
+	}
+	c.String(http.StatusCreated, "Copied")
 }

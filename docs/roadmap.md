@@ -26,6 +26,8 @@
 
 - Move file, directory
 
+- Copy file, directory
+
 - Upload file, directory
 
 - Download file, directory as a tar archived package
@@ -41,4 +43,3 @@
 ### Further plan
 
 - multiple mounted volumes for different accounts
-- 

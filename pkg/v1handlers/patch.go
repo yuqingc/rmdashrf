@@ -1,7 +1,6 @@
 package v1handlers
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -25,30 +24,24 @@ func HandlePatch(c *gin.Context) {
 
 // Rename handles all rename requests from `HandlePatch`
 func Rename(c *gin.Context) {
-	contentPath := c.Param("contentPath")
-	to := c.Query("to")
+	paramContentPath := c.Param("contentPath")
+	paramTo := c.Query("to")
 
 	// This function might be unnecessary
-	if to == "" {
+	if paramTo == "" {
 		c.String(http.StatusBadRequest, "param `to` is required")
 		return
 	}
 
-	if err := CheckContentPath(contentPath); err != nil {
+	if err := EnsureSecurePaths(paramContentPath, paramTo); err != nil {
 		log.Println("checkpath failed:", err)
-		c.String(http.StatusBadRequest, fmt.Sprintf("invalid path \"%s\"\n", contentPath))
+		c.String(http.StatusBadRequest, err.Error())
 		return
 	}
 
-	if err := CheckContentPath(to); err != nil {
-		log.Println("checkpath failed:", err)
-		c.String(http.StatusBadRequest, fmt.Sprintf("invalid path \"%s\"\n", to))
-		return
-	}
-
-	fullOldPath := path.Join(MountDir, contentPath)
-	fullNewPath := path.Join(MountDir, to)
-	if err := manager.Rename(fullOldPath, fullNewPath); err != nil {
+	oldPath := path.Join(MountDir, paramContentPath)
+	newPath := path.Join(MountDir, paramTo)
+	if err := manager.Rename(oldPath, newPath); err != nil {
 		log.Println("rename failed:", err)
 		var ErrMsg = "rename failed: old path should exists and new path should not exist"
 		if os.IsNotExist(err) {

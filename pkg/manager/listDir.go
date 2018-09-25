@@ -1,5 +1,5 @@
 /*
-package manager is the core package that contacts directly with the file system
+Package manager is the core package that contacts directly with the file system
 */
 package manager
 
