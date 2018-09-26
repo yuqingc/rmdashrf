@@ -16,5 +16,9 @@ func HandleGet(c *gin.Context) {
 		GetList(c)
 		return
 	}
+	if restype == "" && comp == "" {
+		DownloadFile(c)
+		return
+	}
 	c.String(http.StatusBadRequest, BadRequestErrMsg)
 }

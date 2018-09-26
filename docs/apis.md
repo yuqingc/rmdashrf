@@ -15,8 +15,9 @@ Table of Contents
          * [Remove a file or directory](#remove-a-file-or-directory)
          * [Move or rename a file or directory](#move-or-rename-a-file-or-directory)
          * [Copy a file or directory](#copy-a-file-or-directory)
+         * [Download a file](#download-a-file)
 
-<!-- Added by: matt, at: 2018-09-25T20:45+08:00 -->
+<!-- Added by: matt, at: 2018-09-26T12:43+08:00 -->
 
 <!--te-->
 
@@ -172,7 +173,7 @@ NONE
 ### Copy a file or directory
 
 ```
-PUT /default/<new path>?action=copy&from=<old path>&restype=<directory>&async=<bool>
+PUT /default/<new path>?action=copy&from=<old path>&restype=<directory>
 ```
 
 `<new path>` does not refer to the directory into which you copy your file/directory. It is the path of the copied file/directory itself
@@ -195,4 +196,10 @@ PUT /default/<new path>?action=copy&from=<old path>&restype=<directory>&async=<b
 
 ```
 NONE
+```
+
+### Download a file
+
+```
+GET /default/<path to a file>
 ```
