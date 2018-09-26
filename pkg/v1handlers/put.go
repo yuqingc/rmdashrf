@@ -117,7 +117,7 @@ func CopyFile(c *gin.Context) {
 	c.String(http.StatusCreated, "Copied")
 }
 
-// CopyFile handles the request for copying a directory
+// CopyDir handles the request for copying a directory
 func CopyDir(c *gin.Context) {
 	paramContentPath := c.Param("contentPath")
 	paramFrom := c.Query("from")

@@ -20,5 +20,9 @@ func HandleGet(c *gin.Context) {
 		DownloadFile(c)
 		return
 	}
+	if restype == "directory" && comp == "" {
+		DownloadDirAsZip(c)
+		return
+	}
 	c.String(http.StatusBadRequest, BadRequestErrMsg)
 }

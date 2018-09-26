@@ -9,6 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// DownloadFile serves static file
 func DownloadFile(c *gin.Context) {
 	contentPath := c.Param("contentPath")
 	if err := EnsureSecurePaths(contentPath); err != nil {
@@ -16,6 +17,7 @@ func DownloadFile(c *gin.Context) {
 		c.String(http.StatusBadRequest, err.Error())
 		return
 	}
+
 	fullFilePath := path.Join(MountDir, contentPath)
 	fileInfo, err := os.Stat(fullFilePath)
 	if err != nil {
@@ -29,4 +31,28 @@ func DownloadFile(c *gin.Context) {
 		return
 	}
 	c.File(fullFilePath)
+}
+
+// DownloadDirAsZip zip folder and response
+// Don not create a file in local disk
+func DownloadDirAsZip(c *gin.Context) {
+	contentPath := c.Param("contentPath")
+	if err := EnsureSecurePaths(contentPath); err != nil {
+		log.Println("checkpath failed:", err)
+		c.String(http.StatusBadRequest, err.Error())
+		return
+	}
+	fullDirPath := path.Join(MountDir, contentPath)
+	dirInfo, err := os.Stat(fullDirPath)
+	if err != nil {
+		c.Status(http.StatusNotFound)
+		return
+	}
+	if !(dirInfo.IsDir()) {
+		c.String(http.StatusBadRequest, "not a directory")
+		return
+	}
+
+	// TODO create and write zip to stream
+
 }
