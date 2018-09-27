@@ -34,7 +34,7 @@ func DownloadFile(c *gin.Context) {
 }
 
 // DownloadDirAsZip zip folder and response
-// Don not create a file in local disk
+// Do not create a file in local disk
 func DownloadDirAsZip(c *gin.Context) {
 	contentPath := c.Param("contentPath")
 	if err := EnsureSecurePaths(contentPath); err != nil {
