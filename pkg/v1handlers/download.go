@@ -54,5 +54,11 @@ func DownloadDirAsZip(c *gin.Context) {
 	}
 
 	// TODO create and write zip to stream
+	// TODO: open download window, maybe not file download
+	c.Header("Content-Disposition", "attachment; filename=WHATEVER_YOU_WANT")
+	c.Header("Content-Type", "application/x-zip-compressed")
+	// This will be a for loop to write zip file
+	// generate and write
+	c.Writer.Write([]byte("hello"))
 
 }
