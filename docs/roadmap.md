@@ -38,8 +38,6 @@
 
 - Trashcan
 
-- gRPC
-
 ### Further plan
 
 - multiple mounted volumes for different accounts
