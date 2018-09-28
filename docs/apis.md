@@ -203,3 +203,9 @@ NONE
 ```
 GET /default/<path to a file>
 ```
+
+### Download a directory as a `zip` file
+
+```
+GET /default/<path to a directory>?restype=directory
+```

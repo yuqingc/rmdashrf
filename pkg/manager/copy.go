@@ -29,7 +29,7 @@ func CopyDir(src, dst string) (err error) {
 		return fmt.Errorf("%s, file or directory already exists", dst)
 	}
 
-	if err = walkDir(src, dst); err != nil {
+	if err = walkAndCopy(src, dst); err != nil {
 		return err
 	}
 
@@ -37,7 +37,7 @@ func CopyDir(src, dst string) (err error) {
 }
 
 // walkDir copies child contents of a directory recursively
-func walkDir(dir, counterpartDst string) (err error) {
+func walkAndCopy(dir, counterpartDst string) (err error) {
 	if err = os.Mkdir(counterpartDst, 0755); err != nil {
 		return err
 	}
@@ -49,7 +49,7 @@ func walkDir(dir, counterpartDst string) (err error) {
 		contentPath := path.Join(dir, content.Name())
 		counterpartPath := path.Join(counterpartDst, content.Name())
 		if content.IsDir() {
-			if err = walkDir(contentPath, counterpartPath); err != nil {
+			if err = walkAndCopy(contentPath, counterpartPath); err != nil {
 				return err
 			}
 		} else {
