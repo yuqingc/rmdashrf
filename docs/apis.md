@@ -16,8 +16,9 @@ Table of Contents
          * [Move or rename a file or directory](#move-or-rename-a-file-or-directory)
          * [Copy a file or directory](#copy-a-file-or-directory)
          * [Download a file](#download-a-file)
+         * [Download a directory as a zip file](#download-a-directory-as-a-zip-file)
 
-<!-- Added by: matt, at: 2018-09-26T12:43+08:00 -->
+<!-- Added by: matt, at: 2018-09-29T01:21+08:00 -->
 
 <!--te-->
 
