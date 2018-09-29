@@ -13,7 +13,7 @@ import (
 // Terminates when it meets an error (no fall back)
 func CopyDir(src, dst string) (err error) {
 	if strings.HasPrefix(dst, src) {
-		return fmt.Errorf("Operation not allowed. Copying directory aborted. Trying to copy a path into its child directory will cause infinite loop.")
+		return fmt.Errorf("operation not allowed. Copying directory aborted. Trying to copy a path into its child directory will cause infinite loop")
 	}
 	// src should exist and must be a directory
 	sfi, err := os.Stat(src)
@@ -63,9 +63,9 @@ func walkAndCopy(dir, counterpartDst string) (err error) {
 
 // ref: stackoverflow: https://stackoverflow.com/questions/21060945/simple-way-to-copy-a-file-in-golang
 
-// CopyFile copies a file from src to dst. If src and dst files exist, and are
+// CopyFile copies a file from src to dst. If `src` and `dst` files exist, and are
 // the same, then return success. Otherwise, attempt to create a hard link
-// between the two files. If that fail, copy the file contents from src to dst.
+// between the two files. If that fails, copy the file contents from src to dst.
 func CopyFile(src, dst string) (err error) {
 	err = ensureBeforeCopy(src, dst)
 	if err != nil {
@@ -100,7 +100,7 @@ func ensureBeforeCopy(src, dst string) (err error) {
 }
 
 // copyFileContents copies the contents of the file named src to the file named
-// by dst. The file will be created if it does not already exist. If the
+// by `dst`. The file will be created if it does not already exist. If the
 // destination file exists, all it's contents will be replaced by the contents
 // of the source file.
 func copyFileContents(src, dst string) (err error) {

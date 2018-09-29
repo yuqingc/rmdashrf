@@ -10,8 +10,8 @@ import (
 	"github.com/yuqingc/rmdashrf/pkg/manager"
 )
 
-// HandleDelete handles DELETE method
-// remove a file or directory
+// HandleDelete handles DELETE method.
+// It remove a file or directory
 func HandleDelete(c *gin.Context) {
 	contentPath := c.Param("contentPath")
 	if err := EnsureSecurePaths(contentPath); err != nil {

@@ -9,9 +9,9 @@ import (
 	"path"
 )
 
-// ZipDir archives a directory to a zip file
-// dirPath is the source path of the directory to be zipped
-// w is the writer you want to write the zip bytes to
+// ZipDir archives a directory to a zip file.
+// `dirPath` is the source path of the directory to be zipped.
+// `w` is the writer you want to write the zip bytes to
 func ZipDir(dirPath string, w io.Writer) (err error) {
 	zipWriter := zip.NewWriter(w)
 	err = walkAndZip(dirPath, "", zipWriter)
@@ -22,9 +22,9 @@ func ZipDir(dirPath string, w io.Writer) (err error) {
 	return
 }
 
-// walkAndZip walk through directory recursively
-// dst is the path where you put your file
-// dst is relative to the root of src
+// walkAndZip walk through directory recursively.
+// `dst` is the path where you put your file,
+// which is relative to the root of src.
 func walkAndZip(src string, dst string, zipWriter *zip.Writer) (err error) {
 	contents, err := ioutil.ReadDir(src)
 	if err != nil {

@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-// Createfile creates a new file
+// CreateFile creates a new file.
 // If the file is already exists of the directory does not exists,
 // it will return an error
 func CreateFile(fullFilePath string) (*os.File, error) {

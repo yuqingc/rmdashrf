@@ -7,8 +7,8 @@ import (
 )
 
 // HandleGet handles all GET request of
-// api: /default/*contentPath
-// params: restype=<file|directory>&comp={list|metadata}
+// api: `/default/*contentPath`
+// params: `restype=<file|directory>&comp={list|metadata}``
 func HandleGet(c *gin.Context) {
 	restype := c.Query("restype")
 	comp := c.Query("comp")
