@@ -52,10 +52,6 @@ func walkAndZip(src string, dst string, zipWriter *zip.Writer) (err error) {
 					errChan <- err
 					return
 				}
-				// `defer` is necessary here.
-				// Do not put the Close expression after the for loop,
-				// or the file will never be closed when there is an error,
-				// and the Close expression will never be reached
 				defer originFile.Close()
 				fileWriter, err := zipWriter.Create(dst + contentName) // for a file
 				for {                                                  // read and write
