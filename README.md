@@ -27,7 +27,7 @@ Table of Contents
 
 ### Start by running binaries
 
-1. Download binaries in the [release page]()
+1. Download binaries in the [release page](https://github.com/yuqingc/rmdashrf/releases)
 
 2. Start
 
