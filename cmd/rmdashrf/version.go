@@ -1,4 +1,4 @@
 package main
 
 // VERSION is the current version of RMDASHRF
-const VERSION = "v0.1.0"
+const VERSION string = "v0.1.0"

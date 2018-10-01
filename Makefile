@@ -1,4 +1,4 @@
-ENTRY := cmd/rmdashrf/main.go
+ENTRY := cmd/rmdashrf/rmdashrf.go
 OUTDIR := bin
-all: cmd/rmdashrf/main.go
-	go build -o $(OUTDIR)/main.out $(ENTRY)
+all: cmd/rmdashrf/rmdashrf.go
+	go install
