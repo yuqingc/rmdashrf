@@ -48,7 +48,7 @@ func CreateFile(c *gin.Context) {
 		return
 	}
 
-	fullFilePath := path.Join(MountDir, paramContentPath)
+	fullFilePath := path.Join(MountedVolume, paramContentPath)
 	createdFile, err := manager.CreateFile(fullFilePath)
 	if err != nil {
 		log.Println(err)
@@ -77,7 +77,7 @@ func CreateDir(c *gin.Context) {
 		parents = true
 	}
 
-	fullDirPath := path.Join(MountDir, paramContentPath)
+	fullDirPath := path.Join(MountedVolume, paramContentPath)
 	if err := manager.CreateDir(fullDirPath, parents); err != nil {
 		log.Println(err)
 		var errMsg = "file or directory already exits"
@@ -106,8 +106,8 @@ func CopyFile(c *gin.Context) {
 		return
 	}
 
-	fullDstPath := path.Join(MountDir, paramContentPath)
-	fullSrcPath := path.Join(MountDir, paramFrom)
+	fullDstPath := path.Join(MountedVolume, paramContentPath)
+	fullSrcPath := path.Join(MountedVolume, paramFrom)
 
 	if err := manager.CopyFile(fullSrcPath, fullDstPath); err != nil {
 		log.Println(err)
@@ -133,8 +133,8 @@ func CopyDir(c *gin.Context) {
 		return
 	}
 
-	fullDesPath := path.Join(MountDir, paramContentPath)
-	fullSrcPath := path.Join(MountDir, paramFrom)
+	fullDesPath := path.Join(MountedVolume, paramContentPath)
+	fullSrcPath := path.Join(MountedVolume, paramFrom)
 
 	if err := manager.CopyDir(fullSrcPath, fullDesPath); err != nil {
 		log.Println(err)

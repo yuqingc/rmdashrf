@@ -20,7 +20,7 @@ func HandleDelete(c *gin.Context) {
 		return
 	}
 
-	fullPath := path.Join(MountDir, contentPath)
+	fullPath := path.Join(MountedVolume, contentPath)
 	paramRecursive := c.Query("recursive")
 	recursive := false
 	if paramRecursive == "true" {

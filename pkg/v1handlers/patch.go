@@ -39,8 +39,8 @@ func Rename(c *gin.Context) {
 		return
 	}
 
-	oldPath := path.Join(MountDir, paramContentPath)
-	newPath := path.Join(MountDir, paramTo)
+	oldPath := path.Join(MountedVolume, paramContentPath)
+	newPath := path.Join(MountedVolume, paramTo)
 	if err := manager.Rename(oldPath, newPath); err != nil {
 		log.Println("rename failed:", err)
 		var ErrMsg = err.Error()

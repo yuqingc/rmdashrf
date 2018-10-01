@@ -9,6 +9,9 @@ Table of Contents
    * [rmdashrf (WIP)](#rmdashrf-wip)
    * [Table of Contents](#table-of-contents)
       * [Get Started](#get-started)
+         * [Start by running binaries](#start-by-running-binaries)
+         * [Run a Docker image](#run-a-docker-image)
+         * [Build from source](#build-from-source)
       * [API Documentation](#api-documentation)
       * [Roadmap](#roadmap)
       * [Contributing](#contributing)
@@ -16,15 +19,31 @@ Table of Contents
          * [Dependencies](#dependencies)
          * [Debug](#debug)
 
-<!-- Added by: matt, at: 2018-09-24T01:03+08:00 -->
+<!-- Added by: matt, at:  -->
 
 <!--te-->
 
 ## Get Started
 
+### Start by running binaries
+
+1. Download binaries in the [release page]()
+
+2. Start
+
 ```
+$ ./rmdashrf -port=8080 -volume=/data
+```
+
+The `-port` flag is optional, `8080` by default. Use `./rmdashrf -h` or `./rmdashrf -help` for more information
+
+### Run a Docker image
+
 TODO
-```
+
+### Build from source
+
+TODO
 
 ## API Documentation
 

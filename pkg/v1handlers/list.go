@@ -41,7 +41,7 @@ func GetList(c *gin.Context) {
 	paramMaxresults := c.Query("maxresults")
 	paramExtension := c.Query("extension")
 
-	dir := path.Join(MountDir, contentPath)
+	dir := path.Join(MountedVolume, contentPath)
 	all := paramAll == "true"
 	var maxresults = MaxListResults
 	if paramMaxresults != "" {

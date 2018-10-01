@@ -21,7 +21,7 @@ func DownloadFile(c *gin.Context) {
 		return
 	}
 
-	fullFilePath := path.Join(MountDir, contentPath)
+	fullFilePath := path.Join(MountedVolume, contentPath)
 	fileInfo, err := os.Stat(fullFilePath)
 	if err != nil {
 		c.Status(http.StatusNotFound)
@@ -45,7 +45,7 @@ func DownloadDirAsZip(c *gin.Context) {
 		c.String(http.StatusBadRequest, err.Error())
 		return
 	}
-	fullDirPath := path.Join(MountDir, contentPath)
+	fullDirPath := path.Join(MountedVolume, contentPath)
 	dirInfo, err := os.Stat(fullDirPath)
 	if err != nil {
 		c.Status(http.StatusNotFound)
