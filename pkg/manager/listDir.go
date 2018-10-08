@@ -12,7 +12,12 @@ import (
 var _ = fmt.Print // ONLY for debug
 
 // ListDir returns all files and/or directories infomation of a specified path
-// and count of all f/d rather than the count of the returned files
+// and count of all f/d rather than the count of the returned files.
+// Caveats: the size of directory is solid, which is the size of the directory
+// itself, not including what is inside the directory.
+// Calculating the total size of a certain directory needs the program
+// to calculate the sizes of all its sub contents recursively, which costs too much time and memory.
+// It is not necessary to make this calculation.
 func ListDir(dir string, all bool, max int, ext string) (results []FileProperty, total int, err error) {
 	contents, err := ioutil.ReadDir(dir)
 	if err != nil {
