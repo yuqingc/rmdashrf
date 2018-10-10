@@ -210,3 +210,27 @@ GET /default/<path to a file>
 ```
 GET /default/<path to a directory>?restype=directory
 ```
+
+### Upload a file
+
+```
+POST /default/<path to a directory where you want to put your file>
+```
+
+The request will be rejected either when the directory does not exist or when the file already exists
+
+**Request content type**
+
+form-data
+
+**Request body**
+
+|Name|Description|
+|-|-|
+|file|Required. File|
+
+**Response status**
+
+```
+200 OK
+```
