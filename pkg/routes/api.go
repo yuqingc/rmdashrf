@@ -12,6 +12,7 @@ import (
 var Router = gin.Default()
 
 func init() {
+	// gin.SetMode(gin.ReleaseMode)
 	// Set a lower memory limit for multipart forms (default is 32 MiB)
 	Router.MaxMultipartMemory = 8 << 20 // 8 MiB
 	v1 := Router.Group("/api/v1")
