@@ -17,8 +17,9 @@ Table of Contents
          * [Copy a file or directory](#copy-a-file-or-directory)
          * [Download a file](#download-a-file)
          * [Download a directory as a zip file](#download-a-directory-as-a-zip-file)
+         * [Upload a file](#upload-a-file)
 
-<!-- Added by: matt, at: 2018-09-29T01:21+08:00 -->
+<!-- Added by: matt, at: 2018-10-10T23:54+08:00 -->
 
 <!--te-->
 

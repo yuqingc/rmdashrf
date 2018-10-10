@@ -9,9 +9,10 @@ Table of Contents
    * [rmdashrf (WIP)](#rmdashrf-wip)
    * [Table of Contents](#table-of-contents)
       * [Get Started](#get-started)
-         * [Start by running binaries](#start-by-running-binaries)
+         * [Install binaries](#install-binaries)
+         * [Install from source](#install-from-source)
+         * [Start](#start)
          * [Run a Docker image](#run-a-docker-image)
-         * [Build from source](#build-from-source)
       * [API Documentation](#api-documentation)
       * [Roadmap](#roadmap)
       * [Contributing](#contributing)
@@ -19,20 +20,26 @@ Table of Contents
          * [Dependencies](#dependencies)
          * [Debug](#debug)
 
-<!-- Added by: matt, at:  -->
+<!-- Added by: matt, at: 2018-10-10T23:54+08:00 -->
 
 <!--te-->
 
 ## Get Started
 
-### Start by running binaries
+### Install binaries
 
-1. Download binaries in the [release page](https://github.com/yuqingc/rmdashrf/releases)
+Download binaries in the [release page](https://github.com/yuqingc/rmdashrf/releases)
 
-2. Start
+### Install from source
+
+```sh
+$ go get github.com/yuqingc/rmdashrf
+```
+
+### Start
 
 ```
-$ ./rmdashrf -port=8080 -volume=/data
+$ rmdashrf -port=8080 -volume=/data
 ```
 
 The `-port` flag is optional, `8080` by default. Use `./rmdashrf -h` or `./rmdashrf -help` for more information
@@ -41,9 +48,6 @@ The `-port` flag is optional, `8080` by default. Use `./rmdashrf -h` or `./rmdas
 
 TODO
 
-### Build from source
-
-TODO
 
 ## API Documentation
 
