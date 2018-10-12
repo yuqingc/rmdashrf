@@ -21,6 +21,6 @@ func init() {
 		v1.PUT("/default/*contentPath", v1handlers.HandlePut)
 		v1.DELETE("/default/*contentPath", v1handlers.HandleDelete)
 		v1.PATCH("/default/*contentPath", v1handlers.HandlePatch)
-		v1.POST("/default/*contentPath", v1handlers.HandlePost)
+		v1.POST("/*defaultSlashContentPath", v1handlers.HandlePost) // There seems to be a bug which causes the route `/default` not work
 	}
 }

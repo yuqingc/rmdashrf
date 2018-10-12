@@ -6,24 +6,38 @@ import (
 	"net/http"
 	"os"
 	"path"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
 
+// HandlePost handles all POST requests
 func HandlePost(c *gin.Context) {
-	paramContentPath := c.Param("contentPath")
+	paramPath := c.Param("defaultSlashContentPath")
 
-	if err := EnsureSecurePaths(paramContentPath); err != nil {
+	if err := EnsureSecurePaths(paramPath); err != nil {
 		log.Println("checkpath failed:", err)
 		c.String(http.StatusBadRequest, err.Error())
 		return
 	}
 
-	fullDirPath := path.Join(MountedVolume, paramContentPath)
+	// hack
+	// all params will not be in the path in the next version (probably)
+	/***** UGLY CODE *****/
+	if !(paramPath == "/default" || strings.HasPrefix(paramPath, "/default/")) {
+		log.Printf("invalid path: %s does not start with default", paramPath)
+		c.Status(http.StatusNotFound)
+		return
+	}
+	/***** UGLY CODE *****/
+
+	contentPath := getContentPath(paramPath)
+
+	fullDirPath := path.Join(MountedVolume, contentPath)
 
 	dirInfo, err := os.Stat(fullDirPath)
 	if err != nil || !(dirInfo.IsDir()) {
-		c.String(http.StatusBadRequest, fmt.Sprintf("no such directory %s", paramContentPath))
+		c.String(http.StatusBadRequest, fmt.Sprintf("no such directory %s", contentPath))
 		return
 	}
 
@@ -34,7 +48,9 @@ func HandlePost(c *gin.Context) {
 }
 
 func handleUpload(c *gin.Context) {
-	paramContentPath := c.Param("contentPath")
+	paramPath := c.Param("defaultSlashContentPath")
+
+	paramContentPath := getContentPath(paramPath)
 
 	// upload file
 	// TODO: upload directory
@@ -58,4 +74,13 @@ func handleUpload(c *gin.Context) {
 	}
 
 	c.String(http.StatusOK, "file uploaded")
+}
+
+// getContentPath trims the `/default` prefix and returns the content path starting with a slash
+func getContentPath(pathWithDefault string) string {
+	var fullPath = pathWithDefault
+	if fullPath == "/default" {
+		fullPath = "/default/"
+	}
+	return strings.TrimPrefix(fullPath, "/default")
 }
