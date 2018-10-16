@@ -55,25 +55,29 @@ func handleUpload(c *gin.Context) {
 	// upload file
 	// TODO: upload directory
 	file, err := c.FormFile("file")
-	if err != nil {
-		c.String(http.StatusBadRequest, fmt.Sprintf("get form err: %s", err.Error()))
+	if file != nil {
+		if err != nil {
+			c.String(http.StatusBadRequest, fmt.Sprintf("get form err: %s", err.Error()))
+			return
+		}
+
+		dst := path.Join(MountedVolume, paramContentPath, file.Filename)
+
+		if _, err := os.Stat(dst); !os.IsNotExist(err) {
+			errMsg := fmt.Sprintf("%s already exists", file.Filename)
+			c.String(http.StatusBadRequest, errMsg)
+			return
+		}
+
+		if err := c.SaveUploadedFile(file, dst); err != nil {
+			c.String(http.StatusBadRequest, fmt.Sprintf("upload file err: %s", err.Error()))
+			return
+		}
+
+		c.String(http.StatusOK, "file uploaded")
 		return
 	}
-
-	dst := path.Join(MountedVolume, paramContentPath, file.Filename)
-
-	if _, err := os.Stat(dst); !os.IsNotExist(err) {
-		errMsg := fmt.Sprintf("%s already exists", file.Filename)
-		c.String(http.StatusBadRequest, errMsg)
-		return
-	}
-
-	if err := c.SaveUploadedFile(file, dst); err != nil {
-		c.String(http.StatusBadRequest, fmt.Sprintf("upload file err: %s", err.Error()))
-		return
-	}
-
-	c.String(http.StatusOK, "file uploaded")
+	c.String(http.StatusBadRequest, "no file")
 }
 
 // getContentPath trims the `/default` prefix and returns the content path starting with a slash
