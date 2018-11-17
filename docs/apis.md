@@ -186,7 +186,7 @@ PUT /default/<new path>?action=copy&from=<old path>&restype=<directory>
 |-|-|
 |action|Required. Set it to "copy"|
 |from|Required. Old path|
-|restype|Optional. Set it to "directory" to copy a directory, or copy a file|
+|restype|Optional. Set it to "directory" to copy a directory, otherwise to copy a file|
 
 **Response status**
 
